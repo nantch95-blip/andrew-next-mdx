@@ -1,0 +1,39 @@
+You’re seeing plain text because MDX doesn’t enable footnotes by default. We just need to turn them on with a remark plugin.
+
+Do this once
+1) Install the plugins
+
+In your project folder:
+
+npm i -D remark-gfm remark-footnotes
+
+2) Wire them into MDX
+
+Open next.config.mjs and replace its MDX setup with this:
+
+import createMDX from '@next/mdx';
+import remarkGfm from 'remark-gfm';
+import remarkFootnotes from 'remark-footnotes';
+
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+  options: {
+    // Tables, autolinks, etc.
+    remarkPlugins: [
+      remarkGfm,
+      // Enable footnotes; inlineNotes lets you do ^[inline footnote] too.
+      [remarkFootnotes, { inlineNotes: true }],
+    ],
+  },
+});
+
+const nextConfig = {
+  experimental: { mdxRs: true },
+  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
+};
+
+export default withMDX(nextConfig);
+
+3) Restart dev server
+Ctrl + C
+npm run dev

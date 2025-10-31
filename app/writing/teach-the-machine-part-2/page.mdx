@@ -1,0 +1,252 @@
+---
+# Teaching the Machine – Teaching the Student  
+### A Blog Series About Bringing AI into the Music Classroom
+<br/>
+This series explores **AI’s pedagogical potential**. It’s written for both the music educator and the prompt engineer—those curious or skeptical about AI’s classroom presence as well as those already experimenting with prompt design as a teaching tool. The goal: to bridge these worlds with clarity, humor, and a shared love of music theory.
+
+
+*Tags: Prompt Engineering, Music Theory, Pedagogy, Chain of Thought, Few Shot, In-Context Learning, Learning by Teaching*
+
+  
+---  
+<br/>
+
+## Part 2: Setting Up the Context
+*October 11, 2025*
+<br/>
+### **So, Theory Can Be Funny?**
+
+I’m weird. I actually enjoy music theory, especially good old fashioned harmonic analysis, Roman numerals and all.  I’m a product of a traditional, classically based music education.  I’m also the beneficiary of the unparalleled pedagogical gifts of my undergraduate theory professor, the late Dr. Samuel Pellman, at Hamilton College.  Sam brought the concepts to life with clarity, patience, and inquenchable humor.  I’ll never forget a hand-written handout (this was the early ‘80s) in which he outlined the resolution tendencies of two varieties of diminished 7th chords which he named “Fred” and “Bruce” – he gave the handout the title “Career Opportunities for Fred and Bruce”.  It was hard not to love learning in his class. With Sam’s guidance, music theory clicked for me and has stuck for nearly 40 years.   
+<br/>
+ 
+<figure>
+<img src="/images/Pellman.png" alt="Pellman" />
+
+</figure>
+
+
+Dr. Samuel Pellman - Adoptive father of Fred and Bruce  
+*[cite credit forspellman.jpg (185×284)]*
+<br/>
+Our textbook for the class was Walter Piston’s venerated tome *Harmony*.  I paid a hefty sum at the college bookstore and never opened it once.  Thanks to Sam’s crystal-clear teaching, and supported by the likes of Fred and Bruce their other mimeographed pals, I had all the context I needed. 
+<br/>
+### **New School and Old School**
+I have been teaching music theory to undergraduates for over 20 years; I like to think I’m a decent teacher, but I’m no Sam Pellman.  Fortunately, in that time, several fine theory textbooks have emerged on the scene, authored by scholars who have found a way make the language of theory and analysis accessible to generations of students removed from Piston, both in years and pedagogical gravitas. 
+The best by far has been the one introduced to me by my dear friend and colleague, Dr. Mark Carlson, *Music Theory Remixed: A Blended Approach for the Practicing Musician* by Kevin Holm-Hudson at the University of Kentucky.  Holm-Hudson is a master of the intuitive explanation illuminated by analogies from subjects like archictecture and English syntax, as well as musical examples that embrace popular, as well as classical, genres.  
+<br/> 
+Piston, on the other hand, is Old School in the truest sense.  A composer and Harvard professor, whose students included Leonard Bernstein and Allen Sapp (who taught me 16th-century counterpoint at the University of Cincinnati), and coiner of the term “secondary dominant”, his text epitomized a classic, rarified, and erudite language and approach.  Compare his introduction to harmonic function to Holm-Hudson’s.
+<br/> 
+Piston: When chords are to be heard in succession there are two main questions to be considered. The first is the choice of the chord to follow a given harmony, and the second is the procedure in connecting the two chords. These are two aspects of what is known as harmonic progression. As more of these forms are studied it will be more and more apparent that the individual sonority of the two chords is of far less importance than the relation of the two roots to each other and to the scale from which they are drawn. [^piston05]
+<br/>
+Holm-Hudson: You may have heard it said that music is a "universal language." While this common expression is not exactly correct, it is true that Western music has its own syntax, and we can illustrate this using an example from language. If we consider the sentence "Susie threw the ball," we see that the meaning of the sentence is shaped by the order and the function of the words (subject-verb-object)…. Something like this happens in music too.[^holmhudson17]  
+<br/>
+### **Synthesizing the Sources**
+The idea was to bring together these two poles and coalesce them into a solid, holistic, foundational context with which to shore up the training of an LLM – in this case, Copilot. This involved:
+<br/> 
+1.&nbsp;Select the relevant passages from both texts. (Once I picked up the ability to write ABC music code, I was able to adapt any embedded examples from the text.)
+
+2.&nbsp;Prompt Copilot to either extract the main points or to do a one/two-sentence summary of each paragraph.   Do this for both texts.
+
+3.&nbsp;Combine these main points into a wholly new version “in its own words”, including a quick guide of the main points at the end.
+<br/>
+The idea is that this three-fold approach would compel the model to engage with these two authors, much in the same manner as any student who is assigned a research project, annotated bibliography, or literature review.   In the end, we would have a pretty solid “primer”.  
+<br/>
+Take a look at some of the pieces of these three steps in action with Copilot.  Note especially how, in the response to Prompt 3, Copilot – completely unbidden – remarks on the authors’ contrasting approaches (I’ve italicized the text). 
+<br/> 
+
+<details>
+  <summary>***Prompt 1 - Condensing Piston*** (click to expand)</summary>
+
+Let's start with Piston. Please summarize each paragraph in as a single sentence - no more than two. Arrange the summaries in a numbered outline. Here is an abridged copy of his chapter on secondary dominants - I left out material on resolution/voice leading and cross-relations, as well as musical examples.
+<br/>
+### **Copilot:**
+Absolutely, Andrew—here’s a structured outline summarizing each paragraph (or logical unit) from Piston’s abridged chapter on secondary dominants. Each point is distilled into one or two sentences, preserving his conceptual flow and terminology.
+
+<br/>**🎼 Piston on Secondary Dominants: Paragraph Summaries**
+
+1.&nbsp;Chromatic accidentals in tonal music often arise from sources other than modulation, including leading-tone adjustments in minor keys and altered nonharmonic tones.
+
+2.&nbsp;Composers historically favored dominant harmonies for their color and directional energy, sometimes creating progressions where each chord acts as the dominant of the next.
+
+3.&nbsp;General rule: Any scale degree may be preceded by its own dominant harmony without compromising the key’s tonal integrity.
+
+4.&nbsp;Terminology varies, but Piston adopts the term “secondary dominants” to describe these temporary dominant chords.
+
+5.&nbsp;Secondary dominants can reinforce tonality, especially when they support the subdominant and dominant degrees, as in Beethoven’s First Symphony where the tonic is delayed but strongly prepared.
+
+6.&nbsp;Beyond function, secondary dominants enrich harmonic color, allowing composers to introduce expressive chromatic tones that still relate logically to the key.
+
+7.&nbsp;All dominant chord types—major triads, dominant sevenths, and leading-tone triads—can be used as secondary dominants, including their inversions.
+
+8.&nbsp;V of ii: Rooted on the sixth degree of the major scale, this chord is avoided in minor keys where ii is diminished and lacks tonic function; the tonic is raised to act as leading-tone to ii.
+
+9.&nbsp;V of III: Since both major and minor third degrees exist, two dominants are available a semitone apart, but each functions only within its respective mode.
+
+10.&nbsp;In major keys, V of III requires raising the second degree (to act as leading-tone) and the fourth degree (to complete the dominant triad).
+
+11.&nbsp;In minor keys, V of III is built on the lowered seventh degree, and the resulting progression resembles a V–I in the relative major.
+
+12.&nbsp;V of IV: The tonic triad can function as dominant to the subdominant, especially when a minor seventh is added; this is a common secondary dominant, often used near cadences to balance prior dominant emphasis.
+
+13.&nbsp;In minor keys, V of IV requires chromatic alteration of the third degree to create a proper leading-tone to IV.
+
+14.&nbsp;V of V: The dominant of the dominant is frequently used in half cadences and is a foundational secondary dominant.
+
+15.&nbsp;V of VI: The submediant has both major and minor forms, but the major-derived version is more common; its dominant requires chromatic alteration of the original dominant.
+
+16.&nbsp;In minor, the dominant harmony of VI doesn’t alter the original dominant’s pitch but reinterprets its function as leading-tone, and if a seventh is added, a chromatically lowered second degree enters the key.
+
+17.&nbsp;Unlike the mediant, the minor submediant appears more often in major contexts, though its dominant feels remote from the diatonic framework.
+ <br/>
+</details>
+
+
+<details>
+  <summary>***Prompt 2 - Condensing Holm-Hudson*** (click to expand)</summary>
+
+The summary is helpful…[let’s] pair his approach with Holm-Hudson, whose approach is far more intuitive and accessible for today's students. Here's his text. Again, I omitted some material, but I did include the ABC-coded examples he uses. You can disregard these for this summary. Please approach your summary as you did with Piston, although you don't have to restrict the paragraph summaries to one or two sentences.
+<br/>
+**Copilot:**
+Absolutely, Andrew—here’s a structured summary of Holm-Hudson’s treatment of secondary dominants, organized as a numbered outline. Each point distills a paragraph or conceptual unit, preserving his intuitive and student-friendly approach while aligning with our pedagogical clarity.
+<br/>
+🎼 **Holm-Hudson on Secondary Dominants: Paragraph Summaries**
+
+1.&nbsp;Diatonic harmonic function provides structural clarity, but its palette is limited to seven triads and seventh chords. By introducing chromatically altered chords—still governed by voice leading and tendency tones—the harmonic vocabulary expands dramatically.
+
+2.&nbsp;In both major and minor keys, the major-minor seventh (Mm7) chord appears only on the dominant scale degree.
+This chord’s strong tendency tones make it resolve naturally to a tonic chord a perfect fourth above or a perfect fifth below.
+
+3.&nbsp;When a Mm7 chord is built on another scale degree through chromatic alteration, it behaves like a dominant of the chord that follows.
+This creates a temporary sense of tonicization, where the following chord is momentarily treated as a tonic.
+
+4.&nbsp;In Beethoven’s First Symphony, the opening C7 chord functions as a V7 of F major, tonicizing the IV chord in C major.
+Later, a D7 chord tonicizes G major (V of C), and a true V7 of C resolves deceptively to vi—each phrase begins with a Mm7 chord that sets up a new harmonic goal.
+
+5.&nbsp;Tonicization is a fleeting suggestion of a new key, without full modulation.
+These progressions are analyzed as secondary dominants (e.g., V7/IV → IV), not as true modulations, because the overall key remains unchanged.
+
+6.&nbsp;Dual Roman numeral labels clarify the dominant relationship and the target chord.
+The first part (e.g., V7) indicates the chord type; the second part (e.g., IV) identifies the chord being tonicized.
+
+7.&nbsp;Secondary dominants are labeled by their function, not by their root.
+A secondary dominant built on the tonic is not labeled “I,” because that would imply a diatonic tonic chord; instead, it’s labeled by its relationship to the chord it tonicizes.
+
+8.&nbsp;Harmonic function diagrams use (D) to indicate localized dominant function.
+<br/>
+For example, in Beethoven’s passage:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*m.1: V7/IV → IV (D → PD)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*m.2: V7 → vi (D → T)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*m.3: V7/V → V (D → D)
+
+
+9.&nbsp;Any consonant triad (major or minor) can be tonicized, but diminished and augmented triads cannot.
+Secondary dominants do not need to be seventh chords, but they must involve a change in chord quality—typically from minor to major.
+
+10.&nbsp;In major keys, tonicizing IV requires adding a minor seventh to the tonic triad, creating a V7/IV.
+A V/iv triad is possible in minor keys because the tonic chord is minor and can be altered to major.
+
+11.&nbsp;To spell a secondary dominant chord:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Start with the chord to be tonicized.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Build a major triad (or Mm7) a perfect fifth above or a perfect fourth below its root.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Apply accidentals as needed to ensure proper chord quality.
+
+12.&nbsp;To identify a secondary dominant chord:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*If a triad, check whether it’s a chromatically inflected major version of a diatonic minor triad.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*If a Mm7 chord, confirm that it resolves to a chord whose root is a perfect fourth higher or fifth lower and is diatonic to the key.
+
+13.&nbsp;Secondary dominants can resolve deceptively, just like diatonic dominants.
+For example, a V7/vi (A7) might resolve to B♭ instead of D minor, creating a deceptive cadence that still fits within the home key.
+ <br/>
+</details>
+
+
+<details>
+  <summary>***Prompt 3 - Synthesizing the Texts*** (click to expand)</summary>
+
+
+Great. Using your own version as a basis, fold in the elements from HH and P. Obviously, eliminate any redundancies, but include any unique ideas or approaches from each author, adapted into a unified language suitable for our Theory Persona. This new version should be formatted in prose, not an outline like the HH and P summaries.
+<br/>
+**Copilot**
+Absolutely, Andrew—here’s a unified prose synthesis of Piston and Holm-Hudson’s approaches to secondary dominants, adapted into our Theory Dashboard voice: clear, structured, and pedagogically resonant. *This version preserves Piston’s architectural rigor and Holm-Hudson’s intuitive accessibility*, while streamlining redundancies and translating their insights into a shared language of harmonic function.
+<br/>
+**🎼 Piston and Holm-Hudson on Secondary Dominants: Paragraph Summaries**
+
+1.&nbsp;Diatonic harmonic function provides structural clarity, but its palette is limited to seven triads and seventh chords.
+By introducing chromatically altered chords—still governed by voice leading and tendency tones—the harmonic vocabulary expands dramatically.
+
+2.&nbsp;In both major and minor keys, the major-minor seventh (Mm7) chord appears only on the dominant scale degree.
+This chord’s strong tendency tones make it resolve naturally to a tonic chord a perfect fourth above or a perfect fifth below.
+
+3.&nbsp;When a Mm7 chord is built on another scale degree through chromatic alteration, it behaves like a dominant of the chord that follows.
+This creates a temporary sense of tonicization, where the following chord is momentarily treated as a tonic.
+
+4.&nbsp;In Beethoven’s First Symphony, the opening C7 chord functions as a V7 of F major, tonicizing the IV chord in C major.
+Later, a D7 chord tonicizes G major (V of C), and a true V7 of C resolves deceptively to vi—each phrase begins with a Mm7 chord that sets up a new harmonic goal.
+
+5.&nbsp;Tonicization is a fleeting suggestion of a new key, without full modulation.
+These progressions are analyzed as secondary dominants (e.g., V7/IV → IV), not as true modulations, because the overall key remains unchanged.
+
+6.&nbsp;Dual Roman numeral labels clarify the dominant relationship and the target chord.
+The first part (e.g., V7) indicates the chord type; the second part (e.g., IV) identifies the chord being tonicized.
+
+7.&nbsp;Secondary dominants are labeled by their function, not by their root.
+A secondary dominant built on the tonic is not labeled “I,” because that would imply a diatonic tonic chord; instead, it’s labeled by its relationship to the chord it tonicizes.
+
+8.&nbsp;Harmonic function diagrams use (D) to indicate localized dominant function.
+For example, in Beethoven’s passage:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*m.1: V7/IV → IV (D → PD)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*m.2: V7 → vi (D → T)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*m.3: V7/V → V (D → D)
+
+9.&nbsp;Any consonant triad (major or minor) can be tonicized, but diminished and augmented triads cannot.
+Secondary dominants do not need to be seventh chords, but they must involve a change in chord quality—typically from minor to major.
+
+10.&nbsp;In major keys, tonicizing IV requires adding a minor seventh to the tonic triad, creating a V7/IV.
+A V/iv triad is possible in minor keys because the tonic chord is minor and can be altered to major.
+
+11.&nbsp;To spell a secondary dominant chord:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Start with the chord to be tonicized.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Build a major triad (or Mm7) a perfect fifth above or a perfect fourth below its root.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Apply accidentals as needed to ensure proper chord quality.
+
+12.&nbsp;To identify a secondary dominant chord:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*If a triad, check whether it’s a chromatically inflected major version of a diatonic minor triad.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*If a Mm7 chord, confirm that it resolves to a chord whose root is a perfect fourth higher or fifth lower and is diatonic to the key.
+
+13.&nbsp;Secondary dominants can resolve deceptively, just like diatonic dominants.
+For example, a V7/vi (A7) might resolve to B♭ instead of D minor, creating a deceptive cadence that still fits within the home key.
+<br/>
+</details>
+ 
+So now Copilot had its context!  
+<br/>
+Next up: **Solving Problems!**
+<br/>
+*Note: The teaching legacy of Dr. Samuel Pellman is gratefully acknowledged, alongside excerpts from Walter Piston’s Harmony and Kevin Holm-Hudson’s Music Theory Remixed. All quoted material is used under fair use for educational commentary and synthesis.
+For more on these works, see Kevin Holm-Hudson, Music Theory Remixed (Oxford University Press, available via Amazon) and Walter Piston, Harmony (W.W. Norton & Company,  also available via Amazon). 
+Image of Dr. Pellman used with [permission or pending rights confirmation.]*
+
+
+
+---
+[^piston05]: Piston, Walter, and Mark DeVoto (ed.). *Harmony*, 5th ed. New York: W.W. Norton & Company, 1987, 17.
+[^holmhudson17]: Holm-Hudson, Kevin. *Music Theory Remixed: A Blended Approach for the Practicing Musician.* New York: Oxford University Press, 2017, 122. [https://global.oup.com/academic/product/music-theory-remixed-9780199943821](https://global.oup.com/academic/product/music-theory-remixed-9780199943821)
+
+
+

@@ -1,0 +1,114 @@
+
+---
+
+# Teaching the Machine – Teaching the Student  
+### A Blog Series About Bringing AI into the Music Classroom
+<br/>
+This series explores **AI’s pedagogical potential**. It’s written for both the music educator and the prompt engineer—those curious or skeptical about AI’s classroom presence as well as those already experimenting with prompt design as a teaching tool. The goal: to bridge these worlds with clarity, humor, and a shared love of music theory.
+
+
+Tags: Prompt Engineering, Music Theory, Pedagogy, Chain of Thought, Few Shot, In-Context Learning, Learning by Teaching
+
+
+---
+<br/>
+## Part 1 · Setting the Pattern
+*October 9, 2025*
+
+<br/>
+### **Not the First Person on the Moon**
+
+Is it possible that *teaching AI* could hold a key to *teaching music theory* to actual students?
+
+This question came to me while looking for a novel way to test some newly acquired prompt-writing skills. With more than twenty years as an undergraduate music-theory educator, applying that expertise seemed ideal for building my **prompt-patterning chops**.
+<br/>
+After taking some tentative first steps challenging various LLMs to music-theory duels, I settled on the tactic that produced the most promising results — a combination of **in-context** and **few-shot + chain-of-thought** prompting.
+<br/>
+Thrilled with the idea that I was exploring uncharted territory, I began scouring **arXiv** and other resources and discovered a fascinating article, *“Teaching LLMs Music Theory with In-Context Learning and Chain-of-Thought Prompting: Pedagogical Strategies for Machines”* by Liam Pond and Ichiro Fujinaga.  
+<br/>
+From Pond and Fujinaga:
+
+> “In-context learning refers to the process of leveraging large prompt context windows by providing instructions, guides, and examples of solutions to problems LLMs would otherwise not be able to understand…. In a similar vein, chain-of-thought prompting improves performance on reasoning and logic-based problems by guiding them to articulate intermediate steps, breaking down complex problems into smaller, simpler tasks. By providing examples of the correct chain of thought, [that is, few-shot patterning] LLMs can be taught to logically process unfamiliar concepts, mimicking human problem-solving.”[^pond23a] 
+<br/>
+Initially deflated, I was soon re-energized: the article gave **authority** to my approach. I pressed on—presenting an AI model with instructional texts to help it solve music-theory problems.
+
+---
+<br/>
+### **The Project**
+
+I designed a series of **prompt-driven lessons** on fundamental theory topics.  For each lesson, I collaborated with the model to:
+
+***Synthesize** a guiding text from different sources.  
+***Create** exercises based on that text.  
+***Challenge** the model to solve the exercises.  
+***Converse** with it to address and correct errors.
+
+That final step is where few-shot and chain-of-thought prompting truly shine.
+
+---
+<br/>
+### **Why In-Context?**
+
+While drafting an in-context prompt on *secondary dominants*, I accidentally hit “Send” before attaching the text. Copilot (the model I’ve worked with most) instantly replied with this neatly packaged explanation:
+<br/>
+---
+<details>
+  <summary>***Copilot Explains Secondary Dominants*** (click to expand)</summary>
+
+
+> **Secondary Dominants: Borrowed Brightness and Harmonic Direction**  
+> In tonal music, not every dominant chord points to the tonic. Sometimes a dominant targets another chord within the key—creating a momentary spotlight as if it were a temporary tonic. These are called *secondary dominants*, among the most expressive tools in the harmonic palette.  
+><br/>
+> **What Is a Secondary Dominant?**  
+> A secondary dominant is a major or dominant-seventh chord that tonicizes a diatonic chord other than I. It’s labeled as V of X (or V/X), where X is the target chord.  
+><br/>
+> **Example in C major:**  
+> - V/V = D major (dominant of G major, the V in C)  
+> - V/ii = A major (dominant of D minor, the ii in C)  
+> These chords often contain accidentals because they borrow from the key of the target chord.  
+><br/>
+> **Functional Flow**  
+> Secondary dominants intensify harmonic motion—they’re like little spotlights that say *“this chord matters right now.”*  
+
+
+
+<br/>
+   <figcaption><em>**Secondary dominants**</em> ***shown with targets and functions***</figcaption> 
+<figure>
+<img src="/images/secondary-dominants-table.png" alt="Secondary Dominants: target & function" />
+
+</figure>
+<br/>
+> **Example Progression:**  
+> C – A – Dm – G – C      (I – V/ii – ii – V – I)  
+<br/>
+> **Summary**  
+> Secondary dominants are like harmonic zoom lenses—they momentarily re-frame a diatonic chord as a tonic, adding color, tension, and direction.
+</details>
+---
+<br/>
+### **In-Context Prompting - Leveling the Playing Field**
+Not bad at all! Clearly, Copilot can produce an accurate, accessible **mini-lesson**—something any modestly capable student could grasp.  
+
+Here’s the thing. Packaging the facts into a nice, neat lesson is probably the easiest part for an LLM.  Challenging the model to apply the techniques to actual problem solving is a different thing altogether.  
+<br/>
+LLMs like Copilot have already amassed a huge store of music theory content as part of their general training, information that is right at their virtual fingertips.  Yet there’s a certain risk that sifting through this colossal haystack for the right needle (as Pond and Fujinaga’s put it) could result in accuracy issues on the problem-solving side. That’s why **in-context prompting** matters: it gives the model a focused set of information to draw from, improving its odds of reasoning correctly.
+<br/>
+It turns out my concerns about accuracy were justified—as you’ll see in upcoming installments.
+
+---
+<br/>
+### ***Coming Next***
+> *Who are Fred and Bruce, and what do they have to do with machine learning and music theory?*
+
+
+[^pond23a]: Pond, Liam; Fujinaga, Ichiro. “Teaching LLMs Music Theory with In-Context Learning and Chain-of-Thought Prompting: Pedagogical Strategies for Machines.” arXiv (2023). https://arxiv.org/abs/2310.01872
+
+
+<!-- redeploy trigger -->
+
+
+
+
+
+

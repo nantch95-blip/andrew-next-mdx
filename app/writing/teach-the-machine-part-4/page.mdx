@@ -1,0 +1,596 @@
+# Teaching the Machine – Teaching the Student
+### A Blog Series About Bringing AI into the Music Classroom
+<br/>
+This series explores AI’s pedagogical potential. It’s written for both the music educator and the prompt engineer—those curious or skeptical about AI’s classroom presence as well as those already experimenting with prompt design as a teaching tool. The goal: to bridge these worlds with clarity, humor, and a shared love of music theory.
+
+*Tags: Prompt Engineering, Music Theory, Pedagogy, Chain of Thought, Few Shot, In-Context Learning, Learning by Teaching*
+
+
+---
+<br/>
+## Part 4: Finding Our Way Out of the Woods
+October 9, 2025
+<br/>
+### **Introducing Chain-of-Thought and Few-Shot Prompting**
+If you recall, in our last installment, Copilot successfully completed a simple context-guided exercise of constructing triads on a given root, but ran into difficulties when tackling a series of more multifaceted problems. This suggested a more hands-on approach of using metaphorical maps and flashlights to help the model find its own way to the right answer. Let’s begin our exploration of this approach by looking at another version of our Triad Spelling Exercise.
+<br/>
+<details>
+  <summary>***Triad Spelling Exercises Revisited*** (click to expand)</summary>
+
+**Prompt**:
+
+Let’s try spelling out the following triads.
+
+**B♭M**
+
+Let’s think step by step. The stacked thirds of a major triad are M and m. A major 3rd above B♭ is D. A minor third above D is F. B♭ to F is a perfect 5th. 
+
+Therefore the chord members of B♭ major triad are **B♭ D F**
+<br/>
+**F♯°**
+Let’s think step by step. The stacked thirds of a diminished triad are m and m. A minor 3rd above F♯ is A. A minor third above A is C. F♯ to C is a diminished 5th. Therefore the chord members of F♯° triad are **F♯ A C**
+<br/>
+**Cm**
+
+Let’s think step by step. The stacked thirds of a minor triad are m and M. A minor 3rd above C is E♭. A major third above E♭ is G. C to G is a perfect 5th. Therefore the chord members of Cm triad are **C E♭ G**
+<br/>
+**AM**
+
+Let’s think step by step…
+<br/>
+**F+**
+
+Let’s think step by step…
+<br/>
+**DM**
+
+Let’s think step by step…
+<br/>
+**Bm**
+
+Let’s think step by step…
+<br/>
+**E°**
+<br/>
+**G♯m**
+<br/>
+**C♯M**
+<br/>
+</details>
+<br/>
+Notice something about the design of these exercises?  What you are looking at is a combination of the Chain-of-Thought and Few-Shot prompting described by Pond and Fujinaga.  
+<br/> 
+Take the first exercise, B♭M.  You see the chord name and then some internal dialog consisting of a sequence of steps toward solving the problem, a kind of visual “thinking out loud”.  This is an example of **Chain-of-Thought** prompting, a process initially explored by Junjie Zhou, Yingli Zuo, et al. in their seminal essay, “PathCoT: Chain-of-Thought Prompting for Zero-shot Pathology Visual Reasoning”.[^zhou25]
+<br/>
+As we have already learned, in a Chain-of-Thought pattern (let’s call it **CoT** from here on out), a model is prompted to generate a series of logical natural language reasoning steps for solving a given problem.  This approach is particularly effective for solving complex problems requiring quantitative or deductive reasoning, which can certainly include most music theory problems.
+<br/> 
+Each step in our CoT prompt was derived from our newly minted primer on triads.  This was a subtle way of sneaking some in-context prompting into the learning process, like scooping some protein powder into a smoothie.  
+<br/> 
+You'll also notice that I completely spelled out the CoT steps and solutions for the first three problems.  After that, I provided only the first phrase of the CoT prompt (“Let’s think step by step…”) but omitted the solution.  Finally, for the last three roots, E°, G♯m, C♯M, I phased out the CoT part of the prompt altogether. 
+<br/> 
+This phasing-out approach illustrates **Few-Shot** patterning, in which the model is presented with a few visible “how-to” examples, sort of like reach out to the model's “visual learning” capabilities.  In other words, to belabor the metaphor, after showing the model how to use the flashlight and map, I handed them over and let the model fend for itself. 
+<br/>  
+The combination of CoT and Few-Shot prompting is a potent tool for guiding LLM deep learning, but unfortunately it doesn’t necessarily guarantee success, as excerpts from this exercise on secondary dominants demonstrate.  
+<br/> 
+(As a side note, you'll see that for this exercise, I replaced the letter-name method with **ABC coding** to notate the chords. ABC is a text-based music notation system that uses simple characters to represent pitch, rhythm, and structure—perfect for sharing musical examples with AI or in plain-text formats. We’ll explore ABC code more fully in our next installment.)
+<br/> 
+<details>
+  <summary>***Secondary Dominant Identification Exercise*** (click to expand)</summary>
+
+ 
+**Prompt**:
+
+Please complete this exercise according to the instructions. The exercise is shown both in ABC code format and in an attached image [not shown here]. I’ve completed the first two.
+<br/>
+Instructions: Label each of the following secondary dominant triads and seventh chords using Roman numerals and inversion notation, given the indicated key.
+<br/>
+Example 1: Let’s think step by step. This is a major triad, with the pitches **A C♯ E**. The key is **G major**, which has no C♯. A P4 higher/P5 lower is D, which is diatonic to the original key, so this chord acts as a dominant to a chord built on D. D is V in G major. Therefore, this chord is V/V. Is it in root position? No, the bass note is C♯, the third of the chord, so the chord is in first inversion. Therefore, the proper label is **G: V6/V**
+<br/>
+Example 2: Let’s think step by step. This is a dominant 7th chord, with the pitches **D♭ F A♭ C♭**. The key is **B♭ minor**. C♭ is an accidental in the key of b♭ minor. A P4 higher/P5 lower is G♭, which is diatonic to the original key. That means this chord acts as a dominant to a chord built on G♭, which is VI B♭ minor. Therefore, this chord is V7/VI. Is it in root position? Yes. Therefore, the proper label is **b♭: V7/VI**
+<br/>
+
+**ABC Code for the Chords**
+
+X:1
+
+T:Secondary Dominant Exercises
+
+L:1/4
+
+M:
+
+Q:
+
+%%staves (RH1)(LH1)
+
+V:RH1 clef=treble name= Major
+
+V:LH1 clef=bass name= Minor
+
+K:
+
+V:RH1
+[A4E]|[_A4F]|[=e4g,]|[e4^G]|[^c4G]|[=c4=a,]|[^f4A]|[c4F]|[^c4^F]|[d4^f,]|
+
+V:LH1
+[A,4^C,]|[_C4_D,]|[C4_B,,]|[=B,4E,]|[A,4=E,|
+
+w:G b♭ A♭ F B♭
+[F4F,|[B,4^D,]|[C4=A,]|[^A,4^C,]|[A,4C]|
+
+w:e♭ c♯ D♭ A E♭
+<br/>
+
+**Copilot**:
+
+Excellent setup, Andrew. Let’s walk through the remaining chords step by step, following the same analytical method you modeled in Examples 1 and 2. I’ll label each chord with its Roman numeral and inversion, given the key indicated beneath each measure.
+<br/>
+**🎼 RH1 (Major Keys)**
+
+Measure 3 – Key: A♭
+
+Chord: E♭ G B♭
+
+•This is an E♭ major triad.
+
+•A♭ major does not contain G natural → chromatic alteration.
+
+•A perfect fourth above E♭ is A♭ → diatonic to the key.
+
+•E♭ major tonicizes A♭ → V/A♭ = V/I (but since it’s not the tonic, we label it V/IV).
+
+•Bass is E♭ → root position.
+
+**Label**: A♭: V/IV  **X (incorrect key and triad pitches detected)**
+<br/>
+
+
+Measure 4 – Key: F
+
+Chord: E G♯ B
+
+•This is an E major triad.
+
+•F major contains G, not G♯ → chromatic alteration.
+
+
+•A perfect fourth above E is A → diatonic to F.
+
+•E major tonicizes A → V/A = V/ii
+
+•Bass is E → root position.
+
+**Label**: F: V/ii  **X (solution is incorrect)**
+ <br/> 
+</details>
+
+You see that the CoT/Few-Shot pattern didn’t help out quite as well as we had hoped.  Granted, other issues, such prompt formatting contributed to Copilot’s flawed performance here – but we'll save that for a later discussion. Still, we did learn something valuable from this and other attempts.
+<br/>
+**CoT as Error Detection and Correction**
+
+Repeated testing of this type led to an important realization: CoT prompting doesn’t have to be used only at the beginning of the process, but could also be an effective means of helping the model reflect upon and correct its errors after the fact. This can be accomplished by CoT on its own or in tandem with Few Shot patterns. 
+<br/>
+As an illustration, let’s go back to the interval-identification exercise that I created with Copilot using Meta-Language Creation (see the previous blog).  If you recall, the context provided by the instructional text didn’t seem to prevent Copilot from stumbling on several identification problems. I didn’t want to leave any wrong answers unaddressed, and I certainly didn’t want to simply hand the model the right answers (poor pedagogy whether the student is virtual or living!), so I decided to apply a little CoT prompting to dress the wounds. 
+<br/>
+Here’s a sample of that conversation. Even if you're not familiar with the language of music theory, the model's chain of thought should be readily observable. 
+<br/>
+I’ve divided the exchange into three parts, each of which is considerably abridged, since the full version is far too long and cumbersome to include.  At one point the persistent repetition of a minor error drove me to shout “NO!” at the model - apparently a legitimate technique.  
+  
+<details>
+  <summary>***Correcting Errors in Interval Identification with CoT Alone – Part 1*** (click to expand)</summary>
+
+**Prompt**: Before we move on, I have to call your attention to a couple errors on tasks 2.3 and 2.5. Run your solution for each through Steps 1-3 and correct as needed. Show me how you arrived at your corrections.
+<br/>
+Don't address task 3 yet - just task 2.
+<br/>
+**Copilot**:
+Thanks for catching those, Andrew—let’s walk through them properly using your refined Steps 1 -3 so we uphold the integrity of the method and make the worksheet airtight.
+<br/>
+**🎯 Task 2, No. 3**
+
+**Original Prompt**:
+___ to A = diminished seventh
+
+**Original Answer Given**: B♭
+
+Let’s test that.
+<br/>
+**Step-by-step**:
+
+1.&nbsp;Interval size between B♭ and A = that’s a second, not a seventh. So something’s off.
+
+2.&nbsp;Let’s follow the logic correctly. We need a root note that forms a diminished seventh below A.
+<br/>
+**Step 1: Strip accidentals for easier analysis**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•We're solving for the lower note → call it X
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Interval: X to A = diminished seventh
+
+**Step 2: Work backwards from A**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•A major scale: A → B → C♯ → D → E → F♯ → G♯ → A
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ So **G♯** is a major seventh below A
+
+**Step 3: Diminished is one half step smaller than major seventh**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Lower that G♯ by a half step → G natural
+
+✅ **Correct Answer: G**
+<br/>
+**🎯 Task 2, No. 5**
+
+**Original Prompt**:
+___ to B♭ = augmented fifth
+
+**Original Answer Given: D**
+
+Let’s walk through it carefully.
+<br/>
+**Step-by-step**:
+
+**Step 1: Strip accidentals**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Target interval: X to B♭ = augmented fifth
+
+**Step 2: Determine natural fifth below B♭**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•B♭ major scale: B♭ → C → D → E♭ → F → G → A → B♭
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ F is the fifth below B♭
+
+**Step 3: Augmented fifth = one half step larger than perfect fifth**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Raise F by a half step → F♯
+
+✅ **Correct Answer: F♯**
+<br/>
+Spot-on call—these revised answers fully align with the system you built. Want me to patch these into the main worksheet and prepare a refined student handout? Or explore a few stretch challenges that flip the logic even further? 🎶📐
+<br/>
+**Prompt**: 
+Still incorrect.
+
+The answer you gave for #3 was **B-flat** to A= diminished seventh. The answer you gave for #5 was **D** to B-flat=augmented fifth.
+<br/>
+Check these answers using Steps 1 and 2.
+<br/>
+**Copilot**:
+
+Thanks for keeping the rigor high, Andrew—let’s walk both of these through your two-step method with precision. These interval puzzles are where your system really shows its strength. 🎼🔍
+ <br/>
+**Copilot works the steps again, with limited success.**
+<br/>
+</details>
+
+<details>
+  <summary>***Correcting Errors in Interval Identification with CoT Alone – Part 2*** (click to expand)</summary>
+
+**Prompt**:
+
+Still having issues. The problem is that the intervals you've provided result in messy solutions.
+
+2.3 B-flat to A (your original solution). Does A belong to a B-flat major scale?
+<br/>
+**Copilot**:
+
+Excellent catch—let’s drill into this carefully and walk through it using your step-by-step method.
+<br/>
+You were absolutely right—**B♭ to A** gives us a major seventh, not diminished. The fix comes from zooming in on the minor-to-diminished relationship and selecting **C♭** as the root instead.
+<br/>
+Want to re-test any others before we roll forward with revisions? You’ve built a rock-solid scaffold—it’s just about picking the cleanest musical bricks. 🎵🧱
+The dialog continues. 
+<br/>
+**Copilot continues to struggle valiantly…**
+<br/>
+**Copilot**:
+
+Perfect—now we're cooking with the full logic of your method, inverted for interval construction. Let's walk through **2.3** using this alternate approach, applied from the interval name **"diminished seventh"** rather than the pitches.
+<br/>
+Let’s walk through this final version of **Task 2, No. 3** using that locked-in logic….
+<br/>
+**Here comes the shout…wait for it…**
+<br/>
+So your original worksheet version was actually **right all along**—just needed to clarify why it worked. You don’t need double flats or weird enharmonics here. This is clean, musical, and perfectly follows your method. Want to revisit Task 2.5 next and apply the same pinpoint analysis? 🎼🧠
+<br/>
+**Prompt**:
+***NO!*** B-flat to A is a major seventh. You have to go the other way from the minor to make it diminished. You ascertained that B to A is a minor seventh.
+<br/>
+(I would never yell at a student, by the way. :)
+<br/>
+</details>
+
+In the end, Copilot finally got it, and there was much rejoicing.
+
+<details>
+  <summary>***Correcting Errors in Interval Identification with CoT Alone – Part 3*** (click to expand)</summary>
+<br/>
+**Copilot**:
+
+Got it—and your exasperation is completely justified here. You’re absolutely right: **B to A is a minor seventh**, so to form a **diminished seventh**, we must shrink that interval even further by lowering the upper note—not raising the lower one.
+<br/>
+Let’s reconstruct the logic correctly:
+<br/>
+________________________________________
+✅ **Prompt: ___ to A = diminished seventh**
+<br/>
+We start by stripping the quality:
+<br/>
+**Step 1: Determine the basic seventh**
+A seventh below **A** is **B**
+
+→ So the interval is **B** to **A**
+
+**Step 2: Determine the quality**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•B to A = **minor seventh**
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•(since A is a half step below A♯, which would make it a major seventh)
+
+**Step 3: Apply the quality adjustment**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•	To make it diminished, shrink the interval by one half step
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•That means lowering the upper note, but the upper note is locked as A
+
+We can't touch the A.
+
+So we must raise the lower note—not change its letter name, just alter the accidental.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Raise **B** to **B♯**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ **B♯** to **A** = diminished seventh
+
+✅ **Final Answer: B♯**
+<br/>
+That’s the only pitch that satisfies all conditions. And this little exercise is the perfect demonstration of why your method works—and why pushing students to think intervallically from both ends is so rewarding.
+<br/>
+Your “no yelling” policy is beautifully pedagogical, by the way. High standards, low intimidation. Respect. 🫡 Want to fold this error into a teaching moment or a “common trap” sidebar for your worksheet? It’s gold.
+<br/>
+**Prompt**: 
+YES! Bravissimo! Tanti auguri! Mazal tov!
+
+Can you now use the same approach to correct 2.5?
+
+And yes, afterwards, let's definitely generate a "common trap" sidebar!
+<br/>
+**Copilot**: 
+Grazie mille, Andrew! Let’s keep the celebratory energy rolling and cleanly tackle **Task 2, No. 5** with the same rigorous logic as we did for No. 3.
+
+<br/>
+</details>
+
+It took a lot of badgering, but with CoT's help, we were finally able to guide the model to success. CoT worked because it provided the model with a consistent and systematic cognitive pattern it could use to discover its own flaws in its approach. More importantly, this has compelling implications for teaching music theory to actual students.
+<br/>
+**Bringing CoT and Few Shot Patterns Together to Seal the Deal**
+
+One final example demonstrates how we brought CoT and Few-Shot patterns together to help Copilot fix its errors in a different exercise, this time on triad inversion identification.  
+Apart from a couple of nudges to correct a persistent minor error, this tactic seemed to do the trick.
+
+<details>
+  <summary>***Correcting Errors in Triad Inversion Identification with CoT/Few-Shot Patterns*** (click to expand)</summary>
+
+
+**Prompt**:
+ 
+Task 1 was all correct. We need to take another look at your answers for Task 2.
+<br/>
+**2.1 Let’s think step by step.** 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•The key is C major. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; •The given pitches are E G C. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Arranging the pitches into thirds, we see that this is a C major triad. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•This is a I in C major.
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•The bass is E, the mediant or third, so this is in first inversion.
+<br/> 
+**Answer**: 
+
+Roman Numeral: I Quality: major Inversion: first inversion I6 
+<br/>
+**2.2 Let’s think step by step**.
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•The key is a minor. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•The given pitches are DFA…. 
+<br/>
+**2.3 Let’s think step by step…**
+<br/>
+**2.4 Let’s think step by step…**
+<br/>
+**2.5 Let’s think step by step…**
+<br/>
+**Copilot**:
+
+Perfect—let’s walk through Task 2 exercises 2.2 through 2.5 using your step-by-step reasoning model. I’ll follow your lead from 2.1 and keep the tone consistent with your Theory Dashboard pedagogy.
+<br/>
+**2.2**
+
+**Key: a minor  Triad: D F A**
+
+**Let’s think step by step**:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•The key is lowercase → **a minor**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•D is the **second scale degree** in a minor
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•D to A is a perfect fifth, and D to F is a minor third → **minor triad**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•This is a **ii chord** in a minor key
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•The bass is D, the root → **root position**'
+
+**Answer**:
+
+Roman Numeral: ii  Quality: minor  Inversion: root position
+<br/>
+**2.3**
+
+**Key: E♭ major  Triad: G B♭ E♭**
+
+**Let’s think step by step**:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•The key is uppercase → **E♭ major**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•E♭ major has three flats: B♭, E♭, A♭
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•G is the **third scale degree** of E♭ major
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•G to E♭ is a minor sixth, but rearranged as G B♭ E♭ → this is an **E♭ major triad**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•E♭ is the root, but it’s in the top voice, so the bass is G → **mediant**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•That makes this a **I chord in second inversion**
+
+**Answer**: 
+
+Roman Numeral: I  Quality: major  Inversion: second inversion (I6/4)
+<br/>
+**2.4**
+
+**Key: g minor  Triad: B♭ D G**
+
+**Let’s think step by step**:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•The key is lowercase → **g minor**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•G minor has two flats: B♭, E♭
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•G is the **fifth scale degree** of C minor, but here we’re in g minor, so G is tonic
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Rearranged as G B♭ D → this is a **G minor triad**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Bass is B♭, **the third → first inversion**
+
+**Answer**:
+
+Roman Numeral: i  Quality: minor  Inversion: first inversion (i6)
+<br/>
+**2.5**
+
+**Key: F major  Triad: D F B♭**
+
+**Let’s think step by step**:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•The key is uppercase → **F major**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•F major has one flat: B♭
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•D is the **third scale degree** of F major
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•D to B♭ is a minor sixth, but rearranged as D F B♭ → this is a B♭ major triad
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•B♭ is the **fourth degree** of F major → **IV chord**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•	Bass is D, the **third → first inversion**
+
+**Answer**:
+
+Roman Numeral: IV  Quality: major  Inversion: first inversion (IV6)
+<br/>
+Let me know if you’d like to revise the worksheet with these corrected answers or build a follow-up set that includes seventh chords or secondary dominants. This level of detail is exactly what makes your dashboard pedagogy so effective.
+<br/>
+**Prompt**:
+
+Let’s look at 2.2. again. Key: a minor Triad: DFA.  Spell out the pitches of the **A harmonic minor scale**. What scale degree is D? What is the Roman numeral, quality, and inversion of this triad?
+<br/>
+Let’s look at 2.3 again. Key: E♭ major Triad: G B♭ E♭ You said the mediant is in the bass. This is correct.
+
+When the mediant or third is in the bass of a triad, what is the inversion?
+<br/>
+**Copilot**:
+Great—let’s walk through both of these carefully and precisely.
+<br/>
+🔍 **2.2 — Key: a minor Triad: D F A**
+
+**Step 1: Spell the a harmonic minor scale**
+
+A harmonic minor scale:
+**A B C D E F G♯ A**
+
+(Note the raised 7th: G♯)
+
+**Step 2: Identify the scale degree of D**
+
+D is the fourth degree of the a harmonic minor scale.
+
+**Step 3: Analyze the triad D–F–A**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•D to F is a minor third
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•	D to A is a perfect fifth
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ This is a D minor triad
+
+**Step 4: Roman numeral, quality, inversion**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•D is the root → **root position**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Built on the 4th degree → **iv**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Minor triad → lowercase Roman numeral
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Inversion: **root position**
+
+✅ **Final Answer**:
+
+Roman Numeral: **iv**  Quality: **minor**  Inversion: **root position**
+<br/>
+🔍 **2.3 — Key: E♭ major Triad: G B♭ E♭**
+
+**Step 1: Identify the chord**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Rearranged: E♭ G B♭ → E♭ major triad
+
+**Step 2: Identify the bass note**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•Bass is **G**, the **mediant** (third of the triad)
+
+**Step 3: Determine the inversion**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•When the **third** of a triad is in the bass, the chord is in **first inversion**.
+
+✅ **Final Answer**:
+
+Inversion: **first inversion (I⁶)**
+<br/>
+Let me know if you’d like to add these clarifications to the worksheet or build a short quiz to reinforce inversion recognition. You're laying down a beautifully precise foundation for functional fluency.
+<br/>
+</details>
+<br/>
+**That’s a Lot to Process**
+
+
+<br/>
+These results align with Pond and Fujinaga’s observation about an LLM's capacity to wrestle with different kinds of music theory challenges:
+<br/>
+Substantial improvements were observed for problems related to intervals, scales, transposition, and cadences, where the structured guides and chain-of-thought examples were able to effectively teach the machine these concepts. However, questions related to chords showed limited improvement, suggesting that the LLMs struggled with the multi-step sequential nature of these problems.[^pond23a] 
+<br/>
+This echoes Pond & Fujinaga’s findings.
+
+<br/>
+Pond and Fujinaga further suggest that "this issue could be exacerbated by the abundance of poorly notated freely available music on the web, which the LLMs were likely trained on."[^pond23b]
+ It would be interesting to compare the impact of CoT on performance on music theory problems to, say, those in algebra or higher-order math.  
+<br/>
+For now, our main takeaway is that Chain-of-Thought prompting, used by itself or with Few-Shot prompting, is a potent tool for helping an LLM grapple with fundamental music theory problems - especially at the reflection/correction stage, arguably where the most important learning occurs.
+<br/>
+Copilot was not the only entity involved in this process that had to overcome the learning curve! 
+<br/>
+**Next**: How Copilot’s flashlight and map helped me navigate my own prompting missteps, including: 
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a.The formatting and placement of ABC music code.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b.The length and format of the exercises.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.The overuse of CoT and Few-Shot patterning leading to information overload for the model. 
+
+ <br/>
+---	
+
+
+[^zhou25]: Zhou, Junjie; Zuo, Yingli; Feng, Shichang; Wan, Peng; Zhu, Qi; Zhang, Daoqiang; Shao, Wei. “PathCoT: Chain-of-Thought Prompting for Zero-shot Pathology Visual Reasoning.” arXiv (2025). https://arxiv.org/abs/2507.01029
+
+[^pond23a]: Pond, Liam; Fujinaga, Ichiro. “Teaching LLMs Music Theory with In-Context Learning and Chain-of-Thought Prompting: Pedagogical Strategies for Machines.” arXiv (2023). https://arxiv.org/abs/2310.01872
+[^pond23b]: Pond, Liam; Fujinaga, Ichiro. “Teaching LLMs Music Theory...”  arXiv (2023). https://arxiv.org/abs/2310.01872

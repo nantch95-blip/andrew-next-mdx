@@ -1,0 +1,265 @@
+---
+
+# Teaching the Machine – Teaching the Student  
+### A Blog Series About Bringing AI into the Music Classroom
+<br/>
+This series explores **AI’s pedagogical potential**. It’s written for both the music educator and the prompt engineer—those curious or skeptical about AI’s classroom presence as well as those already experimenting with prompt design as a teaching tool. The goal: to bridge these worlds with clarity, humor, and a shared love of music theory.
+
+
+*Tags: Prompt Engineering, Music Theory, Pedagogy, Chain of Thought, Few Shot, In-Context Learning, Learning by Teaching*
+## Part 3: Solving Problems
+
+*October 10, 2025*
+
+<br/>
+### **Setting up the Problems**
+When last we met, we had just brought Walter Piston, Kevin Holm-Hudson, and Copilot together to generate a series of theory primers designed to make the deep learning haystack a little more manageable.  Now it was time to give Copilot a little music theory homework.
+<br/>
+Each instructional text and its accompanying exercises would focus on one of the following six topics:
+### •	Intervals
+### •	Triads
+### •	Inversions
+### •	Sevenths
+### •	Harmonic Function/Roman Numerals
+### •	Tonicization/Secondary Dominants
+<br/>
+The next step in our process was to come up with exercises for each topic, typical of those you’d expect any student to face in a first-year theory class.  These fell into two types:
+
+1.&nbsp;Basic, straightforward problems that I adapted from Piston and Holm-Hudson, for which the model would determine an interval or chord name from given pitches, or vice versa.
+
+2.&nbsp;Basic problems designed collaboratively with the model, for which the model was then expected to provide an answer key (as a pretense for testing its ability).  
+<br/>
+
+### **Solving the Notation Cunnundrum**
+From the start, there was a question about the best way for the model to deal with notation.  Attaching an image wouldn’t work. Not to insult Copilot, but from my experience, LLMs can struggle with the kind of visual reasoning needed to accurately parse and correctly interpret printed musical notation.  The simplest solution was just to use the letter names for pitches, with unicode symbols for accidentals, with the understanding that left-to-right would always be interpreted as lower to higher pitches.  Thus, a root-position A7 would be spelled:
+<br/>
+A C♯ E G♮ = A7 in root position
+<br/>
+Since it’s not possible to stack superscripts and subscripts vertically, regular-sized numerals, separated by a hyphen would notate inversions.  Thus:
+<br/>
+C♯ E G♮ A = A6-5 (A7 in first inversion)
+<br/>
+This letter-name notation worked fine for exercises that involved identification of single, isolated chords. Longer excerpts would require application of music coding, but for now, letters it would be.
+<br/>
+### **In-Context Prompting**
+The exercises were attached to the end of the conversation which produced the new instructional text on that topic.  This same text could likewise be placed at the head of any further sets of exercises, thereby directly reinforcing the prompt context. Presumably, though, this wouldn’t be necessary because the model should be able to “remember” this context, once established, across multiple problem-solving prompts covering the same topic. The sequence for a lesson on triad identification, for instance, would look like this:
+<br/>
+ <figcaption><em></em> </figcaption> 
+<figure>
+<img src="/images/triad identification.png" alt="Secondary Dominants: target & function" />
+
+</figure>
+
+<br/>
+### **In-Context Prompting in Action**
+Here is the actual exercise prompt designed to challenge Copilot to spell out triads with specified qualities and on given roots. 
+ <br/>
+<details>
+  <summary>***Basic Triad Spelling Exercise*** (click to expand)</summary>
+
+
+**Prompt**:
+Let's try some simple exercises... 
+<br/>
+Exercise 1. Using the stacking arrangement listed above [i.e., learned from the current instructional text], as well as what we have already learned about calculating intervals [i.e., carried over from a prior instructional text], construct the correct-quality triads on the following roots:  
+
+**B♭M - F♯°- AM - Cm - F+ - DM - Bm - E° - G#m - C♯M**
+<br/>
+### For example: 
+
+### **Em** 
+### * For a minor triad we need to stack thirds m-M. 
+### * A minor third above E is G. 
+### * A major third above G is B. 
+### * The Em triad is spelled E G B.
+<br/>
+**Copilot**:
+
+Absolutely, Andrew—here’s Exercise 1, fully formatted and clearly scaffolded for ease of use, whether for classroom presentation or self-study. I’ve followed the pattern from the Em example: identifying the type of thirds to stack, calculating each pitch, and spelling the final triad.
+<br/>
+________________________________________
+#### 🎼Exercise 1: Constructing Triads
+
+For each root and chord quality below, stack the correct thirds and spell the triad.
+<br/>
+________________________________________
+✅ Example: Em
+### •	Quality: minor → m3 + M3
+### •	E → G (m3)
+### •	G → B (M3)
+### •	Triad: E–G–B
+<br/>
+<figcaption><em></em> </figcaption> 
+<figure>
+<img src="/images/triad construction exercise.png" alt="Secondary Dominants: target & function" />
+
+</figure>
+<br/>
+</details>
+
+<br/>
+These problems were basic enough that Copilot could reasonably be expected to perform as well as it did. Notice also that Copilot considerately laid out the solutions in a nice neat tabular form! 
+<br/>
+It’s difficult to assess how much impact the instructional text actually had on Copilot’s performance, versus how much of it was due to the model’s general training. However, this doesn’t mean we should dismiss the value of in-context prompting.  Quite the contrary - its true value will become clear.
+<br/>
+
+### **In-Context Prompting in Action: Machine/Human-Generated Exercises**
+Let’s now take a look at the second type of prompt, this one involving a collaboration with Copilot in creating a series of exercises. Again, this prompt was preceded by the instructional text.
+
+The process employed a type of prompt patterning known as **Meta-Language Creation**. (To learn more on this and other prompt patterns, you should enroll in Dr. Jules White’s wonderful course “Prompt Engineering for ChatGPT” *https://www.coursera.org/learn/prompt-engineering* on Coursera).
+<br/>
+Rather than spelling out and populating the exercises myself, I introduced a kind of glossary of short textual statements to the effect of "by 'x' I mean 'y'" where 'x' represents a word, term, symbol, etc. and 'y' defines it or describes a particular function or action.   For example, in this exercise, we see:
+
+<br/>
+### •	*By 'root' I mean the lower pitch of an INTERVAL*
+### •	*By 'upper'I mean the upper pitch of an INTERVAL* 
+### •	*By 'quality' I mean INTERVAL quality.*
+<br/>
+In other words, I created a rudimentary code which could be laid out in different arrangements to guide Copilot in creating a variety of exercises. It would be the model’s job to generate the exercises themselves and populate them with pitches and qualities.
+<br/>
+Finally, I asked Copilot to provide an answer key, which was just a trick to get it to solve the problems so I could assess its accuracy. (Don’t tell Copilot, though.) 
+<br/>
+
+These steps are easily visible in the example here, a series of three exercises in interval identification:
+<br/>
+
+<details>
+  <summary>***Machine-Generated Exercise with Intervals*** (click to expand)</summary>
+<br/>
+### **Prompt**:
+Let's try something that challenges the students once they're comfortable with this first process.
+For this prompt, I will be using the following shorthand terms: 
+<br/>
+### * *By ‘root’ I mean the lower pitch of an INTERVAL.* 
+### * *By ‘upper’ I mean the upper pitch of an INTERVAL* 
+### * *By ‘quality’ I mean INTERVAL quality.*
+<br/>
+Generate a worksheet which tests interval identification through these three types of tasks. Provide: 
+### • *Five exercises per task.* 
+### • *A one-sentence instruction for each task.* 
+### • *An illustrating example for each of these three.*
+<br/> 
+Tasks: 
+### *1.	Given ‘root’  to blank ’upper’ = given ’interval+quality’*
+### *2.	Blank ‘root’ to given ‘upper’ = given ‘interval+quality’*
+### *3.	Given ‘root’  and ‘upper’  = Blank ‘interval+quality’*
+<br/>
+Provide an **answer key** with correct solutions for each exercise.
+<br/>
+**Copilot**:
+Perfect way to level up their comfort with intervals, Andrew—this kind of flexible thinking with missing notes sharpens analytical instincts beautifully. Here's a clean, structured worksheet featuring your three interval identification task types, each with five exercises, one-sentence instructions, examples, and a full answer key.
+<br/>
+🎼 **Interval Identification Worksheet: Missing Note Challenges**
+### 🔍 Task 1: Find the missing upper pitch
+
+Instruction: Identify the pitch that completes the given interval above the root note.
+
+*Example:
+Given: C to ___ = major sixth
+•	Answer: A*
+
+Exercises:
+
+1.&nbsp;F♯ to ___ = perfect fifth
+
+2.&nbsp;E♭ to ___ = minor third
+
+3.&nbsp;G to ___ = augmented fourth
+
+4.&nbsp;D to ___ = major seventh
+
+5.&nbsp;B to ___ = diminished fifth
+
+<br/>
+### 🔍 Task 2: Find the missing lower pitch
+Instruction: Identify the pitch that completes the given interval below the upper note.
+
+*Example:
+___ to G♯ = minor third
+•	Answer: F♯* **X(E♯)**
+
+Exercises:
+
+1.&nbsp;___ to C = major sixth
+
+2.&nbsp;___ to E♭ = perfect fourth
+
+3.&nbsp;___ to A = diminished seventh 
+
+4.&nbsp;___ to F♯ = minor second 
+
+5.&nbsp;___ to B♭ = augmented fifth 
+<br/>
+### 🔍 Task 3: Identify the interval and quality
+Instruction: Determine the interval and quality between the two given notes.
+
+Example:
+*D to B♯ =
+•	Answer: Augmented sixth*
+
+Exercises:
+
+1.&nbsp;C♯ to A 
+
+2.&nbsp;F♭ to G♭
+
+3.&nbsp;G to B♭
+
+4.&nbsp;E♯ to D
+
+5.&nbsp;A♭ to F♯
+<br/>
+### 🧠 **Answer Key**
+✅ Task 1:
+
+1.&nbsp;C♯ (F♯ to C♯ = perfect fifth)
+
+2.&nbsp;G♭ (E♭ to G♭ = minor third)
+
+3.&nbsp;C♯ (G to C♯ = augmented fourth)
+
+4.&nbsp;C♯ (D to C♯ = major seventh)
+
+5.&nbsp;F (B to F = diminished fifth)
+<br/>
+✅ Task 2:
+
+1.&nbsp;E♭ (E♭ to C = major sixth)
+
+2.&nbsp;B♭ (B♭ to E♭ = perfect fourth)
+
+3.&nbsp;B♭ (B♭ to A = diminished seventh) **X(B♯)**
+
+4.&nbsp;F (F to F♯ = minor second) **X(E♯)** 
+
+5.&nbsp;D (D to B♭ = augmented fifth) **X(E𝄫)**
+<br/>
+✅ Task 3:
+
+1.&nbsp;Major sixth (C♯ to A) **X(Minor sixth)**
+
+2.&nbsp;Major second (F♭ to G♭)
+
+3.&nbsp;Minor third (G to B♭)
+
+4.&nbsp;Diminished seventh (E♯ to D)
+
+5.&nbsp;Diminished sixth (A♭ to F♯) **X(Augmented sixth)**
+<br/>
+</details>
+
+Copilot did a beautiful job generating the exercise – clear formatting, a nice array of problems to solve.  As you can see, however, when it came to solving the problems, the model ran into difficulties.  Despite our in-context instructional text, the model still made several errors.
+<br/>
+How to fix this?  We could always just point the model back to the instructional text, tell it what the correct answers are, and assume that it will make the connection on its own.  But the fact is we really don’t know what goes on inside that vast black box of an AI brain.  Besides, imagine if you had to handle billions of thought transactions a second, would you take the time to work through a single trivial problem once the answer had been given if you didn’t have to? 
+<br/> 
+The thing is, this may be one infinitesimal flicker to the LLM, but to you the error matters.  So, if you really want the model to learn how to be your helpful collaborator, you must take it by the hand and walk it through the woods a few times with a map and flashlight.  Then you need to hand over the map and flashlight, let go, and have the model demonstrate that it can find its way home again all by itself.  
+<br/>
+That’s where Chain-of-Thought and Few-Shot prompting comes in.  
+<br/>
+**Coming Up Next**
+
+We’ll explore how those maps and flashlights help guide Copilot to greater accuracy in solving music theory problems. 
+<br/>
+---
+*For the concept of Meta-Language Creation, as well as all of the prompt patterns demonstrated in this series, I am grateful to Dr. Jules White, Professor, Department of Computer Science, Vanderbilt University, course instructor, “Prompt Engineering for ChatGPT”, Coursera, https://www.coursera.org/learn/prompt-engineering.  Completed July 18, 2025.* 
+

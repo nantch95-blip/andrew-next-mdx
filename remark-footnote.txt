@@ -1,0 +1,1 @@
+npm i -D remark-gfm remark-footnotes
